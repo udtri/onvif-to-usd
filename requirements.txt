@@ -1,0 +1,7 @@
+opencv-python-headless==4.8.1
+onvif-zeep==0.2.12
+numpy==1.26.2
+pyyaml==6.0.1
+pytest==7.4.3
+# Note: pxr (OpenUSD) typically requires a more specific installation process
+# as documented in the OpenUSD installation guide
