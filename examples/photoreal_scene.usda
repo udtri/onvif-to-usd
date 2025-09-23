@@ -1,0 +1,248 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    upAxis = "Y"
+    timeCodesPerSecond = 24
+    startTimeCode = 0
+    endTimeCode = 4
+)
+
+def Xform "World"
+{
+    # This is an enhanced placeholder USD file
+    # Point cloud reference would have been: None
+    # Total images available: 5
+    
+    def Camera "Camera"
+    {
+        float3 xformOp:translate = (0, 1.5, 5)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+        float focalLength = 35
+        float horizontalAperture = 36
+        float verticalAperture = 24
+        
+        # Camera animation around Y axis
+        float3 xformOp:rotateXYZ.timeSamples = {
+            0: (0, 0, 0),
+            4: (0, 360, 0),
+        }
+    }
+    
+    def Scope "ImageSequence" 
+    {
+        def Plane "ImagePlane"
+        {
+            float3[] extent = [(-2, -2, 0), (2, 2, 0)]
+            int[] faceVertexIndices = [0, 1, 2, 0, 2, 3]
+            point3f[] points = [(-2, -2, 0), (2, -2, 0), (2, 2, 0), (-2, 2, 0)]
+            texCoord2f[] primvars:st = [(0, 0), (1, 0), (1, 1), (0, 1)] (
+                interpolation = "vertex"
+            )
+            
+            # Material binding with timeSamples for each frame
+            rel material:binding.timeSamples = {                0: </World/Materials/FrameMaterial_0>,
+                1: </World/Materials/FrameMaterial_1>,
+                2: </World/Materials/FrameMaterial_2>,
+                3: </World/Materials/FrameMaterial_3>,
+                4: </World/Materials/FrameMaterial_4>,
+            }
+        }
+    }
+    
+    def Scope "Materials"
+    {
+        def Material "FrameMaterial_0"
+        {
+            token outputs:surface.connect = </World/Materials/FrameMaterial_0/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </World/Materials/FrameMaterial_0/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @images/image_1.jpg@
+                float2 inputs:st.connect = </World/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_1"
+        {
+            token outputs:surface.connect = </World/Materials/FrameMaterial_1/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </World/Materials/FrameMaterial_1/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @images/image_2.jpg@
+                float2 inputs:st.connect = </World/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_2"
+        {
+            token outputs:surface.connect = </World/Materials/FrameMaterial_2/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </World/Materials/FrameMaterial_2/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @images/image_3.jpg@
+                float2 inputs:st.connect = </World/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_3"
+        {
+            token outputs:surface.connect = </World/Materials/FrameMaterial_3/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </World/Materials/FrameMaterial_3/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @images/image_4.jpg@
+                float2 inputs:st.connect = </World/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_4"
+        {
+            token outputs:surface.connect = </World/Materials/FrameMaterial_4/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </World/Materials/FrameMaterial_4/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @images/image_5.jpg@
+                float2 inputs:st.connect = </World/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+    }
+    
+    # Representation of the 3D geometry from synthetic frames
+    def Xform "Geometry"
+    {
+        # A cube as seen in our synthetic frames
+        def Cube "Cube" (
+            kind = "component"
+        )
+        {
+            float3 xformOp:translate = (0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:rotateXYZ.timeSamples = {
+                0: (0, 0, 0),
+                4: (0, 360, 0),
+            }
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            color3f[] primvars:displayColor = [(0, 255, 255)]
+        }
+        
+        # A pyramid 
+        def Cone "Pyramid" (
+            kind = "component"
+        )
+        {
+            float3 xformOp:translate = (0, -2, 0)
+            float3 xformOp:scale = (1, 2, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            color3f[] primvars:displayColor = [(255, 0, 0)]
+        }
+        
+        # A sphere
+        def Sphere "Sphere" (
+            kind = "component"
+        )
+        {
+            float3 xformOp:translate = (-2, 0.5, 0)
+            float3 xformOp:scale = (0.5, 0.5, 0.5)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            color3f[] primvars:displayColor = [(0, 0, 255)]
+        }
+    }
+    
+    # This would typically come from photogrammetry point cloud
+    def PointInstancer "SyntheticPointCloud" (
+        kind = "component"
+    )
+    {
+        point3f[] positions = [
+            # Synthetic points representing what would come from photogrammetry
+            (0, 0, 0), (1, 0, 0), (0, 1, 0), (0, 0, 1),
+            (-1, 0, 0), (0, -1, 0), (0, 0, -1),
+            (1, 1, 1), (-1, -1, -1), (1, -1, 1), (-1, 1, -1),
+            # Many more points would be included here
+        ]
+        
+        int[] protoIndices = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        
+        def Sphere "PointPrototype"
+        {
+            double radius = 0.01
+            color3f[] primvars:displayColor = [(1, 1, 1)]
+        }
+    }
+}

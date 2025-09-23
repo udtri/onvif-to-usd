@@ -1,0 +1,17 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    upAxis = "Y"
+)
+
+def Xform "World"
+{
+    # This is a placeholder USD file
+    # Point cloud reference would have been: colmap_out/dense/fused.ply
+    # Texture image used would have been: images/image_3.jpg
+    
+    def Mesh "PlaceholderPlane"
+    {
+        # A placeholder for actual geometry
+    }
+}

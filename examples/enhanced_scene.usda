@@ -1,0 +1,905 @@
+#usda 1.0
+(
+    defaultPrim = "Scene"
+    upAxis = "Y"
+    metersPerUnit = 1
+    timeCodesPerSecond = 24
+    startTimeCode = 0
+    endTimeCode = 29
+)
+
+def Xform "Scene" (
+    kind = "assembly"
+)
+{
+    # Scene generated from synthetic frames
+
+    def Camera "Camera" (
+        kind = "component"
+    )
+    {
+        float3 xformOp:translate = (0, 0, 5)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+        float focalLength = 35
+        float horizontalAperture = 36
+        float verticalAperture = 24
+        
+        # Camera animation with rotation around Y axis
+        float3 xformOp:rotateXYZ.timeSamples = {
+            0: (0, 0, 0),
+            29: (0, 360, 0),
+        }
+    }
+    
+    def Scope "ImageSequence" 
+    {
+        def Plane "ImagePlane"
+        {
+            float3[] extent = [(-2, -2, 0), (2, 2, 0)]
+            int[] faceVertexIndices = [0, 1, 2, 0, 2, 3]
+            point3f[] points = [(-2, -2, 0), (2, -2, 0), (2, 2, 0), (-2, 2, 0)]
+            texCoord2f[] primvars:st = [(0, 0), (1, 0), (1, 1), (0, 1)] (
+                interpolation = "vertex"
+            )
+            
+            # Material binding with timeSamples for each frame
+            rel material:binding.timeSamples = {
+                0: </Scene/Materials/FrameMaterial_0>,
+                1: </Scene/Materials/FrameMaterial_1>,
+                2: </Scene/Materials/FrameMaterial_2>,
+                3: </Scene/Materials/FrameMaterial_3>,
+                4: </Scene/Materials/FrameMaterial_4>,
+                5: </Scene/Materials/FrameMaterial_5>,
+                6: </Scene/Materials/FrameMaterial_6>,
+                7: </Scene/Materials/FrameMaterial_7>,
+                8: </Scene/Materials/FrameMaterial_8>,
+                9: </Scene/Materials/FrameMaterial_9>,
+                10: </Scene/Materials/FrameMaterial_10>,
+                11: </Scene/Materials/FrameMaterial_11>,
+                12: </Scene/Materials/FrameMaterial_12>,
+                13: </Scene/Materials/FrameMaterial_13>,
+                14: </Scene/Materials/FrameMaterial_14>,
+                15: </Scene/Materials/FrameMaterial_15>,
+                16: </Scene/Materials/FrameMaterial_16>,
+                17: </Scene/Materials/FrameMaterial_17>,
+                18: </Scene/Materials/FrameMaterial_18>,
+                19: </Scene/Materials/FrameMaterial_19>,
+                20: </Scene/Materials/FrameMaterial_20>,
+                21: </Scene/Materials/FrameMaterial_21>,
+                22: </Scene/Materials/FrameMaterial_22>,
+                23: </Scene/Materials/FrameMaterial_23>,
+                24: </Scene/Materials/FrameMaterial_24>,
+                25: </Scene/Materials/FrameMaterial_25>,
+                26: </Scene/Materials/FrameMaterial_26>,
+                27: </Scene/Materials/FrameMaterial_27>,
+                28: </Scene/Materials/FrameMaterial_28>,
+                29: </Scene/Materials/FrameMaterial_29>,
+            }
+        }
+    }
+    
+    def Scope "Materials"
+    {
+        def Material "FrameMaterial_0"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_0/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_0/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_000_20250917_175728_918383.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_1"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_1/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_1/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_001_20250917_175729_001095.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_2"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_2/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_2/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_002_20250917_175729_006425.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_3"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_3/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_3/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_003_20250917_175729_011934.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_4"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_4/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_4/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_004_20250917_175729_016549.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_5"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_5/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_5/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_005_20250917_175729_022015.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_6"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_6/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_6/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_006_20250917_175729_028108.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_7"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_7/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_7/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_007_20250917_175729_033358.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_8"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_8/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_8/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_008_20250917_175729_037931.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_9"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_9/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_9/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_009_20250917_175729_042302.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_10"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_10/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_10/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_010_20250917_175729_046696.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_11"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_11/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_11/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_011_20250917_175729_051347.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_12"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_12/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_12/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_012_20250917_175729_056942.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_13"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_13/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_13/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_013_20250917_175729_062800.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_14"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_14/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_14/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_014_20250917_175729_068926.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_15"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_15/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_15/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_015_20250917_175729_073824.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_16"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_16/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_16/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_016_20250917_175729_078862.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_17"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_17/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_17/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_017_20250917_175729_084254.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_18"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_18/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_18/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_018_20250917_175729_090498.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_19"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_19/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_19/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_019_20250917_175729_096913.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_20"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_20/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_20/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_020_20250917_175729_101408.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_21"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_21/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_21/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_021_20250917_175729_105829.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_22"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_22/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_22/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_022_20250917_175729_110227.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_23"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_23/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_23/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_023_20250917_175729_115639.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_24"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_24/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_24/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_024_20250917_175729_121229.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_25"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_25/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_25/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_025_20250917_175729_126892.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_26"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_26/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_26/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_026_20250917_175729_131513.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_27"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_27/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_27/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_027_20250917_175729_136015.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_28"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_28/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_28/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_028_20250917_175729_140615.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+        def Material "FrameMaterial_29"
+        {
+            token outputs:surface.connect = </Scene/Materials/FrameMaterial_29/PBRShader.outputs:surface>
+            
+            def Shader "PBRShader"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1, 1, 1)
+                float inputs:roughness = 0.4
+                float inputs:metallic = 0
+                token outputs:surface
+                
+                # Connect texture to diffuseColor
+                color3f inputs:diffuseColor.connect = </Scene/Materials/FrameMaterial_29/TextureReader.outputs:rgb>
+            }
+            
+            def Shader "TextureReader"
+            {
+                uniform token info:id = "UsdUVTexture"
+                asset inputs:file = @./test_frames/frame_029_20250917_175729_146724.jpg@
+                float2 inputs:st.connect = </Scene/ImageSequence/ImagePlane.inputs:st>
+                token inputs:wrapS = "repeat"
+                token inputs:wrapT = "repeat"
+                float3 outputs:rgb
+            }
+        }
+    }
+    
+    # Representation of the 3D geometry from synthetic frames
+    def Xform "Geometry"
+    {
+        # A cube as seen in our synthetic frames
+        def Cube "Cube" (
+            kind = "component"
+        )
+        {
+            float3 xformOp:translate = (0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:rotateXYZ.timeSamples = {
+                0: (0, 0, 0),
+                29: (0, 360, 0),
+            }
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+            color3f[] primvars:displayColor = [(0, 1, 1)]
+        }
+        
+        # A pyramid 
+        def Cone "Pyramid" (
+            kind = "component"
+        )
+        {
+            float3 xformOp:translate = (0, -2, 0)
+            float3 xformOp:scale = (1, 2, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            color3f[] primvars:displayColor = [(1, 0, 0)]
+        }
+        
+        # A sphere
+        def Sphere "Sphere" (
+            kind = "component"
+        )
+        {
+            float3 xformOp:translate = (-2, 0.5, 0)
+            float3 xformOp:scale = (0.5, 0.5, 0.5)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+            color3f[] primvars:displayColor = [(0, 0, 1)]
+        }
+    }
+}
