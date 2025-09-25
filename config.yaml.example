@@ -1,0 +1,47 @@
+# ONVIF Camera Configuration
+# Basic camera connection settings
+cameras:
+  - name: "FrontDoorCamera"
+    host: "<CAMERA_IP_ADDRESS>"
+    onvif_port: 80
+    username: "<USERNAME>"
+    password: "<PASSWORD>"
+    rtsp_url: "rtsp://<CAMERA_IP_ADDRESS>:554/live/main"
+  
+  - name: "BackyardCamera"
+    host: "<CAMERA_IP_ADDRESS>"
+    onvif_port: 8000
+    username: "<USERNAME>"
+    password: "<PASSWORD>"
+    rtsp_url: "rtsp://<CAMERA_IP_ADDRESS>:554/profile1"
+
+# Processing settings
+settings:
+  capture:
+    frame_interval: 5  # Capture every 5 frames
+    total_frames: 100  # Total number of frames to capture
+    output_dir: "./captured_frames"
+  
+  photogrammetry:
+    enabled: true
+    colmap_path: "/usr/bin/colmap"  # Path to COLMAP executable
+    quality: "high"  # Options: low, medium, high
+    output_dir: "./colmap_output"
+  
+  usd:
+    scene_name: "camera_scene"
+    output_path: "./output/scene.usda"
+
+# Optional Azure IoT Operations connector settings
+azure_iot_operations:
+  enabled: false  # Set to true to enable AIO integration
+  connector:
+    endpoint: "https://<YOUR-CONNECTOR-ENDPOINT>"
+    tenant: "<YOUR-TENANT>"
+    client_id: "<YOUR-CLIENT-ID>"
+    client_secret: "${CLIENT_SECRET}"  # Use environment variable for secrets
+  data_options:
+    send_frames: false  # Whether to send captured frames to Azure
+    send_interval: 10   # Send every 10th frame
+    telemetry_enabled: true
+    model_id: "dtmi:com:example:onvifcamera;1"

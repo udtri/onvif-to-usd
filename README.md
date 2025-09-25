@@ -27,7 +27,7 @@ This project allows you to:
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/yourusername/onvif-to-usd.git
+git clone https://github.com/udtri/onvif-to-usd.git
 cd onvif-to-usd
 ```
 
